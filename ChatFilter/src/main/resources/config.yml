@@ -1,0 +1,165 @@
+# =============================================
+# ChatFilter Configuration
+# =============================================
+# After editing, run /filter reload to apply changes.
+#
+# Placeholders available in messages:
+#   %player%      - the player name
+#   %checked%     - number of messages checked
+#   %blocked%     - number of messages blocked
+#   %rate%        - block rate percentage
+#   %violations%  - number of violations for a player
+#   %last%        - timestamp of the last violation
+#   %rank%        - rank in the top violators list
+#   %page%        - current page number
+#   %name%        - the blacklisted server name that was detected
+#   %timestamp%   - timestamp of a specific violation
+#   %message%     - the blocked message content
+#   %reason%      - the reason the message was blocked
+
+# --------------------------------------------------
+# Character Whitelist – Only allow standard characters
+# --------------------------------------------------
+character_whitelist:
+  enabled: true
+  allowed_unicode_blocks:
+    - BASIC_LATIN
+    - GENERAL_PUNCTUATION
+  block_message: "&cPlease use only standard English characters."
+
+# --------------------------------------------------
+# Maximum Message Length
+# --------------------------------------------------
+max_message_length:
+  enabled: true
+  max_length: 25              # block messages longer than this
+  block_message: "&cYour message is too long. Keep it under %max% characters."
+
+# --------------------------------------------------
+# IP Address Detection
+# --------------------------------------------------
+ip_detection:
+  enabled: true
+  block_hex_ip: true
+  block_obfuscated: true
+  block_message: "&cAdvertising IP addresses is not allowed."
+
+# --------------------------------------------------
+# Domain & Discord Invite Detection
+# --------------------------------------------------
+domain_detection:
+  enabled: true
+  block_generic: true
+  block_discord: true
+  block_invite_phrases: true
+  block_message: "&cAdvertising servers or domains is not allowed."
+
+# --------------------------------------------------
+# Swear / Profanity Detection
+# --------------------------------------------------
+swear_detection:
+  enabled: true
+  block_message: "&cPlease keep chat respectful."
+
+# --------------------------------------------------
+# Repeated Character Spam – blocks iiiiiiiii etc.
+# --------------------------------------------------
+repeated_char_spam:
+  enabled: true
+  max_repeats: 5               # block if a character repeats >5 times in a row
+  block_message: "&cdon't spam characters."
+
+# --------------------------------------------------
+# Bypass Settings
+# --------------------------------------------------
+bypass:
+  ops: false
+
+# --------------------------------------------------
+# Block Sound
+# --------------------------------------------------
+block_sound:
+  enabled: true
+  sound: BLOCK_NOTE_BLOCK_BASS
+  volume: 1.0
+  pitch: 1.0
+
+# --------------------------------------------------
+# Server Name Block Message
+# --------------------------------------------------
+server_name_block_message: "&cPlease don't say other servers name (%name%)"
+
+# --------------------------------------------------
+# Stats Messages (used by /filter stats, /filter top, etc.)
+# --------------------------------------------------
+stats:
+  total_header: "&6--- ChatFilter Global Stats ---"
+  total_checked: "&eMessages checked: &f%checked%"
+  total_blocked: "&eMessages blocked: &f%blocked%"
+  total_block_rate: "&eBlock rate: &f%rate%%"
+  player_header: "&6--- Stats for %player% ---"
+  player_violations: "&cViolations: &f%violations%"
+  player_last_violation: "&cLast violation: &f%last%"
+  player_no_data: "&eNo stats recorded for this player."
+  top_header: "&6--- Top Violators (Page %page%) ---"
+  top_entry: "&c%rank%. &f%player% &8- &c%violations% violations &7(last: %last%)"
+  top_no_data: "&eNo violations recorded yet."
+  history_header: "&6--- %player%'s Violation History (Page %page%) ---"
+  history_entry: "&c%rank%. &7[%timestamp%] &f%message% &8(Reason: %reason%)"
+
+# --------------------------------------------------
+# Rate Limiting — blocks players who send too many
+# messages in a short window
+# --------------------------------------------------
+rate_limit:
+  enabled: false
+  max_messages: 5
+  window_seconds: 10
+  block_message: "&cYou're chatting too fast."
+
+# --------------------------------------------------
+# Flood Detection — blocks repeated/very similar messages
+# --------------------------------------------------
+flood_detection:
+  enabled: false
+  similarity_threshold: 0.85
+  window_seconds: 30
+  max_repeats: 2
+  block_message: "&cPlease don't repeat messages."
+
+# --------------------------------------------------
+# Custom Regex Rules — admin-defined patterns
+# --------------------------------------------------
+custom_rules:
+  # - name: "email"
+  #   pattern: "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+  #   block_message: "&cSharing contact info is not allowed"
+  #   enabled: true
+
+# --------------------------------------------------
+# Mixed-Script Detection — blocks words mixing
+# multiple Unicode scripts (e.g. Latin + Cyrillic)
+# --------------------------------------------------
+mixed_script_detection:
+  enabled: false
+  block_message: "&cPlease use only standard English characters."
+
+# --------------------------------------------------
+# MiniMessage Formatting — blocks <red>, <bold>, etc.
+# --------------------------------------------------
+minimessage_filter:
+  enabled: true
+  block_message: "&cPlease don't use chat formatting codes."
+
+# --------------------------------------------------
+# Legacy Color Codes — blocks &a, §a, &x hex codes
+# --------------------------------------------------
+color_code_filter:
+  enabled: true
+  block_message: "&cPlease don't use chat formatting codes."
+
+# --------------------------------------------------
+# Audit Log — logs all blocked messages to audit.log
+# --------------------------------------------------
+audit_log:
+  enabled: false

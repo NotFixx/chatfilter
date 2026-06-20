@@ -1,0 +1,128 @@
+╔══════════════════════════════════════════════════════╗
+║                   ChatFilter v1.1.1                   ║
+║                  Command Reference                     ║
+╚══════════════════════════════════════════════════════╝
+
+All commands require OP or the listed permission node.
+
+
+┌─────────────────────────────────────────────────────┐
+│ /filter  —  Main administration command             │
+└─────────────────────────────────────────────────────┘
+
+  ┌─ Testing & Diagnostics ──────────────────────────┐
+
+  /filter test <message>
+    Simulate the filter against a message to check
+    whether it would be blocked, without actually
+    sending it. Useful for testing new swear words
+    or tweaking config.
+    Permission:  filter.test
+
+  ┌─ Statistics ─────────────────────────────────────┐
+
+  /filter stats [player]
+    Show global filter stats (messages checked,
+    blocked, block rate) or a specific player's
+    violation count and last offence.
+    Permission:  filter.stats
+
+  /filter top [page]
+    Display the top violators on the server, ranked
+    by total violations (10 per page).
+    Permission:  filter.stats
+
+  /filter history <player> [page]
+    Browse a player's detailed violation log with
+    timestamps, messages, and block reasons.
+    Permission:  filter.history
+
+  ┌─ Configuration ──────────────────────────────────┐
+
+  /filter reload
+    Reload config.yml and rebuild the entire filter
+    pipeline without restarting the server.
+    Permission:  filter.reload
+
+  ┌─ Whitelist Management ───────────────────────────┐
+
+  /filter whitelist addplayer <player>
+    Add a player to the whitelist. Whitelisted players
+    completely bypass all chat filters.
+    Permission:  filter.whitelist.manage
+
+  /filter whitelist removeplayer <player>
+    Remove a player from the whitelist.
+    Permission:  filter.whitelist.manage
+
+  /filter whitelist list
+    List all currently whitelisted players.
+    Permission:  filter.whitelist.manage
+
+  ┌─ Swear Word Management ──────────────────────────┐
+
+  /filter addword <word>
+    Add a swear word to the fuzzy-matched list.
+    Uses BK-tree edit-distance matching, so evasion
+    attempts (leet-speak, separators, etc.) will
+    still be caught.
+    Permission:  filter.slur.manage
+
+  /filter removeword <word>
+    Remove a word from the fuzzy-matched list.
+    Permission:  filter.slur.manage
+
+  /filter addwordbasic <word>
+    Add a swear word to the exact-match list only.
+    No evasion detection — the message must contain
+    the word verbatim. Use this for words that are
+    borderline or where fuzzy matching is too
+    aggressive.
+    Permission:  filter.slur.manage
+
+  /filter removewordbasic <word>
+    Remove a word from the exact-match list.
+    Permission:  filter.slur.manage
+
+  /filter listwords
+    Display all configured swear words (both fuzzy
+    and exact-match lists).
+    Permission:  filter.slur.manage
+
+  ┌─ Server Name Blacklist ──────────────────────────┐
+
+  /filter addserver <name>
+    Add a server name or keyword to the advertising
+    blacklist. Messages mentioning these names will
+    be blocked.
+    Permission:  filter.servers.manage
+
+  /filter removeserver <name>
+    Remove a server name from the blacklist.
+    Permission:  filter.servers.manage
+
+  /filter listservers
+    List all blacklisted server names.
+    Permission:  filter.servers.manage
+
+
+┌─────────────────────────────────────────────────────┐
+│ /filterbypass  —  Bypass toggle                     │
+└─────────────────────────────────────────────────────┘
+
+  /filterbypass
+    Toggle your own bypass on or off.
+
+  /filterbypass on|off
+    Explicitly enable or disable your own bypass.
+
+  /filterbypass <player>
+    Toggle bypass for another player.
+
+  /filterbypass <player> on|off
+    Explicitly enable or disable bypass for another
+    player.
+
+  Permissions:
+    filter.bypass         — Toggle your own bypass
+    filter.bypass.manage  — Toggle bypass for others

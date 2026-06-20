@@ -1,0 +1,48 @@
+name: ChatFilter
+version: 1.1.0
+main: nothing.chatfilter.ChatFilterPlugin
+api-version: '1.21'
+description: ChatFilter
+author: Nothing
+
+commands:
+  filter:
+    description: ChatFilter admin commands
+    usage: /filter <test|stats|top|reload|whitelist|addword|removeword|addwordbasic|removewordbasic|listwords|addserver|removeserver|listservers|history>
+    permission: filter.admin
+  filterbypass:
+    description: Toggle chat filter bypass for yourself or another player
+    usage: /filterbypass [player] [on|off]
+    permission: filter.bypass
+
+permissions:
+  filter.admin:
+    description: Access to all filter admin commands
+    default: op
+  filter.test:
+    description: Simulate chat filtering
+    default: op
+  filter.stats:
+    description: View filter statistics
+    default: op
+  filter.reload:
+    description: Reload filter configuration
+    default: op
+  filter.whitelist.manage:
+    description: Manage the whitelist
+    default: op
+  filter.slur.manage:
+    description: Add or remove custom swear words
+    default: op
+  filter.servers.manage:
+    description: Add or remove blacklisted server names
+    default: op
+  filter.bypass:
+    description: Allows you to toggle your own chat filter bypass with /filterbypass
+    default: op
+  filter.bypass.manage:
+    description: Allows you to toggle bypass for other players
+    default: op
+  filter.history:
+    description: View violation history
+    default: op
